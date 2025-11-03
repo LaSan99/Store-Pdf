@@ -20,7 +20,7 @@ const storage = new Storage(client);
 export const USER_PDFS_BUCKET_ID = import.meta.env.VITE_APPWRITE_BUCKET_ID || 'user-pdfs';
 
 // PDF file constraints
-export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB in bytes
+export const MAX_FILE_SIZE = 40 * 1024 * 1024; // 10MB in bytes
 export const ALLOWED_FILE_TYPES = ['application/pdf'];
 
 export { client, account, storage };
