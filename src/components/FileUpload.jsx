@@ -23,7 +23,7 @@ const FileUpload = ({ onUploadSuccess }) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(false);
-    
+
     const files = e.dataTransfer.files;
     if (files && files[0]) {
       handleFileUpload(files[0]);
@@ -42,20 +42,19 @@ const FileUpload = ({ onUploadSuccess }) => {
     setUploading(true);
 
     try {
-      // Validate file using the service
+      // Allow all file types, only check file size (optional)
       pdfStorageService.validateFile(file);
-      
-      // Upload file
+
+      // Upload
       const uploadedFile = await pdfStorageService.uploadFile(file, user.$id);
-      
-      // Reset input
+
+      // Reset file input
       if (inputRef.current) {
         inputRef.current.value = '';
       }
-      
-      // Notify parent component of successful upload
+
       onUploadSuccess(uploadedFile);
-      
+
     } catch (error) {
       setError(error.message);
     } finally {
@@ -71,10 +70,10 @@ const FileUpload = ({ onUploadSuccess }) => {
     <div className="w-full">
       <div className="mb-4">
         <h3 className="text-lg font-medium text-gray-900 mb-2">
-          Upload PDF File
+          Upload File
         </h3>
         <p className="text-sm text-gray-600">
-          Upload PDF files up to 10MB. Only PDF format is supported.
+          Upload any file up to 10MB.
         </p>
       </div>
 
@@ -128,7 +127,7 @@ const FileUpload = ({ onUploadSuccess }) => {
             <p className="text-sm text-gray-600 mb-1">
               <span className="font-medium text-indigo-600">Click to upload</span> or drag and drop
             </p>
-            <p className="text-xs text-gray-500">PDF files only, up to 10MB</p>
+            <p className="text-xs text-gray-500">Any file type, up to 10MB</p>
           </div>
         )}
       </div>
