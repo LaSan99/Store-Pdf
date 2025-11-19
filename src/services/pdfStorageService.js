@@ -8,21 +8,21 @@ class PDFStorageService {
    * @param {File} file - The file to validate
    * @throws {Error} If file is invalid
    */
-  validateFile(file) {
-    // Check file type
-    if (!ALLOWED_FILE_TYPES.includes(file.type)) {
-      throw new Error('Only PDF files are allowed');
-    }
+  // validateFile(file) {
+  //   // Check file type
+  //   if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+  //     throw new Error('Only PDF files are allowed');
+  //   }
 
     // Check file size (10MB limit)
     if (file.size > MAX_FILE_SIZE) {
       throw new Error('File size must be less than 10MB');
     }
 
-    // Additional check for PDF extension
-    if (!file.name.toLowerCase().endsWith('.pdf')) {
-      throw new Error('File must have a .pdf extension');
-    }
+    // // Additional check for PDF extension
+    // if (!file.name.toLowerCase().endsWith('.pdf')) {
+    //   throw new Error('File must have a .pdf extension');
+    // }
   }
 
   /**
