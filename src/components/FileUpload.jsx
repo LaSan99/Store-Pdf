@@ -98,7 +98,6 @@ const FileUpload = ({ onUploadSuccess }) => {
           ref={inputRef}
           type="file"
           className="hidden"
-          accept=".pdf,application/pdf"
           onChange={handleChange}
           disabled={uploading}
         />
