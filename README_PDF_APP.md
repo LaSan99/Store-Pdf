@@ -2,6 +2,14 @@
 
 A React web application for storing and managing PDF files using Appwrite as the backend. Users can securely upload, download, and delete their PDF files with user-based access control.
 
+## ⚠️ Getting CORS Errors?
+
+**If you see "Access to fetch... has been blocked by CORS policy" errors:**
+
+👉 **[CLICK HERE FOR QUICK 2-MINUTE FIX](./CORS_FIX.md)** 👈
+
+This is the #1 most common setup issue!
+
 ## 🚀 Live Demo
 
 **[View Live App](https://store-pdf-three.vercel.app/)**
@@ -29,6 +37,21 @@ A React web application for storing and managing PDF files using Appwrite as the
 
 2. **Node.js**: Version 18 or higher
 
+## ⚠️ IMPORTANT: Fixing CORS Errors
+
+If you're getting **CORS errors** (like "Access to fetch... has been blocked by CORS policy"), you MUST configure your domain in Appwrite:
+
+1. Go to [Appwrite Console](https://cloud.appwrite.io/console) → Your Project
+2. Navigate to **Settings → Platforms**
+3. Click **"Add Platform"** → Select **"Web App"**
+4. Add your hostname:
+   - For local development: `localhost`
+   - For Vercel: `store-pdf-three.vercel.app` (or your custom domain)
+   - **❌ Wrong**: `https://your-app.vercel.app` (includes protocol)
+   - **✅ Correct**: `your-app.vercel.app` (hostname only)
+
+**See [SETUP_GUIDE.md](./SETUP_GUIDE.md) for detailed instructions.**
+
 ## Setup Instructions
 
 ### 1. Clone and Install
@@ -41,13 +64,21 @@ npm install
 
 ### 2. Appwrite Configuration
 
+**📖 For complete step-by-step instructions with screenshots, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)**
+
 1. **Create a new project** in your Appwrite console
-2. **Configure Authentication**:
+
+2. **⚠️ CRITICAL - Add Web Platform** (fixes CORS errors):
+   - Go to Settings → Platforms → Add Platform → Web App
+   - Add hostname: `localhost` (for development) and your production domain
+   - **DO NOT** include `http://`, `https://`, or trailing `/`
+
+3. **Configure Authentication**:
    - Go to Auth → Settings
    - Enable Email/Password authentication
    - Set session length as needed
 
-3. **Create Storage Bucket**:
+4. **Create Storage Bucket**:
    - Go to Storage → Create Bucket
    - Name: `user-pdfs`
    - Permissions: 
@@ -59,9 +90,9 @@ npm install
    - Maximum file size: 10MB
    - Allowed file extensions: `pdf`
 
-4. **Configure CORS** (if needed):
-   - Go to Settings → CORS
-   - Add your domain (e.g., `http://localhost:5173` for development)
+5. **Get your Project ID**:
+   - Go to Settings → General
+   - Copy your Project ID for the next step
 
 ### 3. Environment Variables
 
@@ -176,10 +207,25 @@ npm run build
 
 ### Common Issues
 
-1. **"Cannot read properties of undefined"**: Check environment variables are set correctly
-2. **CORS errors**: Add your domain to Appwrite CORS settings
-3. **Upload failures**: Verify storage bucket exists and has correct permissions
-4. **Authentication errors**: Check if email/password auth is enabled in Appwrite
+**For detailed troubleshooting, see [SETUP_GUIDE.md](./SETUP_GUIDE.md)**
+
+1. **⚠️ CORS errors: "Access to fetch... has been blocked by CORS policy"**
+   - **Solution**: Go to Appwrite Console → Settings → Platforms → Add your domain as a Web platform
+   - Add ONLY the hostname (e.g., `your-app.vercel.app`, NOT `https://your-app.vercel.app`)
+   - This is the most common issue - see SETUP_GUIDE.md for step-by-step instructions
+
+2. **"Cannot read properties of undefined (reading 'name')"**: 
+   - Check environment variables are set correctly
+   - Clear browser cache and reload
+   - Verify Appwrite project configuration
+
+3. **Upload failures**: 
+   - Verify storage bucket exists and has correct permissions
+   - Check bucket ID matches your .env file (`user-pdfs`)
+
+4. **Authentication errors**: 
+   - Check if email/password auth is enabled in Appwrite
+   - Verify your platform is configured in Appwrite Console
 
 ### Storage Bucket Permissions
 

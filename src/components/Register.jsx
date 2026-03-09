@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { formatAuthError } from '../lib/errorUtils';
 
 const Register = ({ onSwitchToLogin }) => {
   const [name, setName] = useState('');
@@ -32,7 +33,7 @@ const Register = ({ onSwitchToLogin }) => {
     try {
       await register(email, password, name);
     } catch (error) {
-      setError(error.message || 'Failed to create account');
+      setError(formatAuthError(error));
     } finally {
       setLoading(false);
     }

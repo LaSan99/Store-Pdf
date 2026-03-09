@@ -24,8 +24,14 @@ export const AuthProvider = ({ children }) => {
   const checkUser = async () => {
     try {
       const userData = await account.get();
-      setUser(userData);
+      // Ensure we have valid user data with a non-empty ID
+      if (userData && typeof userData.$id === 'string' && userData.$id.length > 0) {
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
     } catch (error) {
+      // Handle authentication errors gracefully (user not logged in is expected)
       setUser(null);
     } finally {
       setLoading(false);
@@ -47,8 +53,14 @@ export const AuthProvider = ({ children }) => {
     try {
       await account.createEmailPasswordSession(email, password);
       const userData = await account.get();
-      setUser(userData);
+      // Ensure we have valid user data with a non-empty ID
+      if (userData && typeof userData.$id === 'string' && userData.$id.length > 0) {
+        setUser(userData);
+      } else {
+        throw new Error('Failed to retrieve user data after login');
+      }
     } catch (error) {
+      // Re-throw the error so Login component can handle it
       throw error;
     }
   };

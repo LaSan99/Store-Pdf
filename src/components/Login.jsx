@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { formatAuthError } from '../lib/errorUtils';
 
 const Login = ({ onSwitchToRegister }) => {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ const Login = ({ onSwitchToRegister }) => {
     try {
       await login(email, password);
     } catch (error) {
-      setError(error.message || 'Failed to login');
+      setError(formatAuthError(error));
     } finally {
       setLoading(false);
     }
