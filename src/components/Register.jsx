@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { formatAuthError } from '../lib/errorUtils';
 
 const Register = ({ onSwitchToLogin }) => {
   const [name, setName] = useState('');
@@ -32,15 +33,7 @@ const Register = ({ onSwitchToLogin }) => {
     try {
       await register(email, password, name);
     } catch (error) {
-      // Provide helpful error messages for common issues
-      let errorMessage = error.message || 'Failed to create account';
-      
-      // Check for network/CORS errors
-      if (error.message?.includes('fetch') || error.message?.includes('NetworkError') || error.type === 'network') {
-        errorMessage = '🚨 Connection Error: Unable to reach Appwrite server. This is usually a CORS configuration issue. Please check CORS_FIX.md in the project root for instructions.';
-      }
-      
-      setError(errorMessage);
+      setError(formatAuthError(error));
     } finally {
       setLoading(false);
     }

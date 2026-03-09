@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const userData = await account.get();
       // Ensure we have valid user data before setting
-      if (userData && userData.$id) {
+      if (userData?.$id) {
         setUser(userData);
       } else {
         setUser(null);
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
       await account.createEmailPasswordSession(email, password);
       const userData = await account.get();
       // Ensure we have valid user data
-      if (userData && userData.$id) {
+      if (userData?.$id) {
         setUser(userData);
       } else {
         throw new Error('Failed to retrieve user data after login');

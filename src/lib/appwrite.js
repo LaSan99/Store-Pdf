@@ -2,25 +2,23 @@ import { Client, Account, Storage } from "appwrite";
 
 // Check if required environment variables are defined
 if (!import.meta.env.VITE_APPWRITE_ENDPOINT) {
-    throw new Error(`
-        ❌ VITE_APPWRITE_ENDPOINT is not defined in environment variables.
-        
-        Please follow these steps:
-        1. Copy .env.example to .env
-        2. Update VITE_APPWRITE_ENDPOINT with your Appwrite server URL
-        3. See SETUP_GUIDE.md for complete setup instructions
-    `);
+    throw new Error(
+        '❌ VITE_APPWRITE_ENDPOINT is not defined in environment variables.\n\n' +
+        'Please follow these steps:\n' +
+        '1. Copy .env.example to .env\n' +
+        '2. Update VITE_APPWRITE_ENDPOINT with your Appwrite server URL\n' +
+        '3. See SETUP_GUIDE.md for complete setup instructions'
+    );
 }
 
 if (!import.meta.env.VITE_APPWRITE_PROJECT_ID) {
-    throw new Error(`
-        ❌ VITE_APPWRITE_PROJECT_ID is not defined in environment variables.
-        
-        Please follow these steps:
-        1. Copy .env.example to .env
-        2. Update VITE_APPWRITE_PROJECT_ID with your project ID from Appwrite Console
-        3. See SETUP_GUIDE.md for complete setup instructions
-    `);
+    throw new Error(
+        '❌ VITE_APPWRITE_PROJECT_ID is not defined in environment variables.\n\n' +
+        'Please follow these steps:\n' +
+        '1. Copy .env.example to .env\n' +
+        '2. Update VITE_APPWRITE_PROJECT_ID with your project ID from Appwrite Console\n' +
+        '3. See SETUP_GUIDE.md for complete setup instructions'
+    );
 }
 
 const client = new Client()

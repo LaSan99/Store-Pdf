@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { formatAuthError } from '../lib/errorUtils';
 
 const Login = ({ onSwitchToRegister }) => {
   const [email, setEmail] = useState('');
@@ -17,15 +18,7 @@ const Login = ({ onSwitchToRegister }) => {
     try {
       await login(email, password);
     } catch (error) {
-      // Provide helpful error messages for common issues
-      let errorMessage = error.message || 'Failed to login';
-      
-      // Check for network/CORS errors
-      if (error.message?.includes('fetch') || error.message?.includes('NetworkError') || error.type === 'network') {
-        errorMessage = '🚨 Connection Error: Unable to reach Appwrite server. This is usually a CORS configuration issue. Please check CORS_FIX.md in the project root for instructions.';
-      }
-      
-      setError(errorMessage);
+      setError(formatAuthError(error));
     } finally {
       setLoading(false);
     }
