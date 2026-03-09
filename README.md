@@ -2,6 +2,14 @@
 
 Kickstart your React development with this ready-to-use starter project integrated with [Appwrite](https://www.appwrite.io)
 
+## ⚠️ Getting CORS Errors?
+
+**If you see "Access to fetch... has been blocked by CORS policy" errors:**
+
+👉 **[CLICK HERE FOR QUICK FIX](./CORS_FIX.md)** 👈
+
+This is the most common issue and takes only 2 minutes to fix!
+
 ## 🚀Getting started
 
 ### Clone the Project
@@ -40,7 +48,7 @@ If you see **"Access to fetch... has been blocked by CORS policy"** errors:
    - ❌ Wrong: `https://your-app.vercel.app`
    - ✅ Correct: `your-app.vercel.app`
 
-For more detailed troubleshooting, see [SETUP_GUIDE.md](./SETUP_GUIDE.md).
+**📖 [See detailed CORS fix instructions](./CORS_FIX.md)**
 
 ## 💡 Additional notes
 - This starter project is designed to streamline your React development with Appwrite.

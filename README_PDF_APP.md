@@ -2,6 +2,14 @@
 
 A React web application for storing and managing PDF files using Appwrite as the backend. Users can securely upload, download, and delete their PDF files with user-based access control.
 
+## ⚠️ Getting CORS Errors?
+
+**If you see "Access to fetch... has been blocked by CORS policy" errors:**
+
+👉 **[CLICK HERE FOR QUICK 2-MINUTE FIX](./CORS_FIX.md)** 👈
+
+This is the #1 most common setup issue!
+
 ## 🚀 Live Demo
 
 **[View Live App](https://store-pdf-three.vercel.app/)**
