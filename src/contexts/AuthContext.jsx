@@ -24,8 +24,15 @@ export const AuthProvider = ({ children }) => {
   const checkUser = async () => {
     try {
       const userData = await account.get();
-      setUser(userData);
+      // Ensure we have valid user data before setting
+      if (userData && userData.$id) {
+        setUser(userData);
+      } else {
+        setUser(null);
+      }
     } catch (error) {
+      // Handle authentication errors gracefully
+      console.error('Failed to get user session:', error);
       setUser(null);
     } finally {
       setLoading(false);
@@ -47,8 +54,14 @@ export const AuthProvider = ({ children }) => {
     try {
       await account.createEmailPasswordSession(email, password);
       const userData = await account.get();
-      setUser(userData);
+      // Ensure we have valid user data
+      if (userData && userData.$id) {
+        setUser(userData);
+      } else {
+        throw new Error('Failed to retrieve user data after login');
+      }
     } catch (error) {
+      console.error('Login error:', error);
       throw error;
     }
   };
